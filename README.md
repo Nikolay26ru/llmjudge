@@ -236,6 +236,23 @@ print(report.pass_rate, report.mean_score)
 print(render_markdown(report))
 ```
 
+## Use it as a CI gate
+
+Block a merge when answer quality regresses — `--fail-under` exits non-zero, and
+the core installs with no heavy dependency tree:
+
+```yaml
+# .github/workflows/eval.yml  (steps inside your job)
+- run: pip install "llm-judge-kit[openai]"
+- run: llm-judge-kit eval cases.jsonl --rubric factuality --provider openai:gpt-5 --fail-under 0.9
+  env:
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+```
+
+Or keep evals as ordinary `pytest` tests via the bundled plugin (see
+[Integrations](#pytest--eval-as-ordinary-tests)) and run them in your existing
+test job.
+
 ## Why depend on this
 
 - **Easy to depend on** — zero transitive deps in the core; provider SDKs are opt-in extras.
