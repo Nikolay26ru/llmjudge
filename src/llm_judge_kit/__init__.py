@@ -1,4 +1,4 @@
-"""LLMJudge — provider-agnostic, reproducible, typed LLM-as-a-judge.
+"""LLMJudge Kit — provider-agnostic, reproducible, typed LLM-as-a-judge.
 
 The public API is intentionally tiny so downstream projects can depend on it
 without surprises. The headline primitive is :class:`Judge`::

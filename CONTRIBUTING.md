@@ -1,6 +1,6 @@
-# Contributing to LLMJudge
+# Contributing to LLMJudge Kit
 
-Thanks for your interest! LLMJudge aims to be a small, dependable primitive, so
+Thanks for your interest! LLMJudge Kit aims to be a small, dependable primitive, so
 contributions are judged first on whether they keep the core **easy to depend
 on**: stable public API, minimal dependencies, great DX.
 
@@ -39,7 +39,7 @@ uv run pytest --cov=llm_judge_kit --cov-report=term-missing
 - New runtime dependencies need an explicit justification. The core stays
   dependency-free; provider SDKs go behind optional extras.
 
-## Extending LLMJudge
+## Extending LLMJudge Kit
 
 - **New provider**: implement the `Provider` protocol (`complete()`), and
   optionally register it under a scheme via `register_provider`.

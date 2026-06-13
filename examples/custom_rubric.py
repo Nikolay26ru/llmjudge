@@ -1,4 +1,4 @@
-"""Extend LLMJudge with your own rubric — no changes to the core required."""
+"""Extend LLMJudge Kit with your own rubric — no changes to the core required."""
 
 from llm_judge_kit import Judge, MockProvider, Rubric, register_rubric
 

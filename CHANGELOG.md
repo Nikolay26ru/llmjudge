@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-14
+
+### Added
+- Runnable pytest-integration example (`examples/test_with_pytest.py`),
+  exercised in CI under pytest.
+- Trusted Publishing release workflow (`.github/workflows/release.yml`) — future
+  releases publish to PyPI from GitHub Actions via OIDC (no API token).
+
+### Changed
+- Aligned the product brand to **LLMJudge Kit** across the README, docs, and
+  generated report titles (the distribution is `llm-judge-kit`; the public
+  `LLMJudgeError` API is unchanged).
+- Declared the GitHub maintainer (`Nikolay26ru`) as the package
+  author/maintainer in metadata and `LICENSE`.
+- Lowered the Development Status classifier from `4 - Beta` to `3 - Alpha`.
+
+## [0.1.0] - 2026-06-13
+
 ### Added
 - Project scaffold: `pyproject.toml`, tooling gate (ruff + mypy strict + pytest
   with ≥95% coverage), CI workflow, MIT license, contributor docs.

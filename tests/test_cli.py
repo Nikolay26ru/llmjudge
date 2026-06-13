@@ -30,7 +30,7 @@ def test_eval_json_to_stdout(tmp_path: Path, capsys: pytest.CaptureFixture[str])
 def test_eval_writes_output_file(tmp_path: Path) -> None:
     out = tmp_path / "report.md"
     assert main(["eval", str(_dataset(tmp_path)), "-o", str(out)]) == 0
-    assert "# LLMJudge report" in out.read_text()
+    assert "# LLMJudge Kit report" in out.read_text()
 
 
 def test_eval_html_format(tmp_path: Path) -> None:
@@ -63,7 +63,7 @@ def test_report_roundtrip(tmp_path: Path, capsys: pytest.CaptureFixture[str]) ->
     report_file = tmp_path / "r.json"
     assert main(["eval", str(_dataset(tmp_path)), "-o", str(report_file), "--format", "json"]) == 0
     assert main(["report", str(report_file), "--format", "md"]) == 0
-    assert "# LLMJudge report" in capsys.readouterr().out
+    assert "# LLMJudge Kit report" in capsys.readouterr().out
 
 
 def test_error_returns_exit_code_2(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

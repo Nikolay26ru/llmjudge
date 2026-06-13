@@ -1,4 +1,4 @@
-# LLMJudge
+# LLMJudge Kit
 
 > Provider-agnostic, reproducible, typed **LLM-as-a-judge** — a small primitive you can depend on.
 
@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Typed](https://img.shields.io/badge/typed-mypy%20strict-blue)](https://mypy-lang.org/)
 
-LLMJudge is one tiny, well-tested module for scoring model outputs with an LLM
+LLMJudge Kit is one tiny, well-tested module for scoring model outputs with an LLM
 judge — the part most projects re-implement badly. The core has **zero required
 runtime dependencies**, a **stable typed API**, and runs **fully offline in
 tests** via a deterministic mock.
@@ -150,7 +150,7 @@ Runnable example: [`examples/test_with_pytest.py`](examples/test_with_pytest.py)
 
 ### Any framework
 
-LLMJudge judges *strings*, so it drops into any stack — LangChain, LlamaIndex,
+LLMJudge Kit judges *strings*, so it drops into any stack — LangChain, LlamaIndex,
 DSPy, a raw script — with no adapter. Whatever produces the output, pass it in:
 
 ```python

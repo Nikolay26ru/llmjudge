@@ -123,7 +123,7 @@ def render_json(report: Report) -> str:
 def render_markdown(report: Report) -> str:
     """Render a report as a Markdown summary + per-case table."""
     lines = [
-        "# LLMJudge report",
+        "# LLMJudge Kit report",
         "",
         f"- **provider:** {_md_cell(report.provider)}",
         f"- **rubric:** {_md_cell(report.rubric)}",
@@ -164,7 +164,7 @@ def render_html(report: Report) -> str:
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>LLMJudge report</title>
+<title>LLMJudge Kit report</title>
 <style>
 body {{ font-family: system-ui, sans-serif; margin: 2rem; }}
 table {{ border-collapse: collapse; width: 100%; }}
@@ -175,7 +175,7 @@ td.fail {{ color: #b3261e; font-weight: 600; }}
 </style>
 </head>
 <body>
-<h1>LLMJudge report</h1>
+<h1>LLMJudge Kit report</h1>
 <p><strong>provider:</strong> {html.escape(report.provider)} &middot;
 <strong>rubric:</strong> {html.escape(report.rubric)} &middot;
 <strong>threshold:</strong> {report.threshold:.2f}</p>

@@ -67,7 +67,7 @@ def test_render_json_is_valid_json() -> None:
 
 def test_markdown_has_summary_and_rows() -> None:
     md = render_markdown(_report(0.9))
-    assert "# LLMJudge report" in md
+    assert "# LLMJudge Kit report" in md
     assert "mean score" in md
     assert "| 1 | c1 | 0.900 | PASS |" in md
 
