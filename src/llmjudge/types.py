@@ -32,7 +32,9 @@ class ProviderResponse:
     latency_ms: float | None = None
     cost_usd: float | None = None
     finish_reason: str | None = None
-    metadata: dict[str, Any] = field(default_factory=dict)
+    # hash=False: a dict is unhashable, so excluding it keeps the frozen
+    # dataclass hashable (all other fields are). Equality still includes it.
+    metadata: dict[str, Any] = field(default_factory=dict, hash=False)
 
 
 @dataclass(frozen=True)
@@ -60,7 +62,9 @@ class JudgeResult:
     violations: tuple[str, ...] = ()
     rubric: str = ""
     raw: str = ""
-    metadata: dict[str, Any] = field(default_factory=dict)
+    # hash=False: a dict is unhashable, so excluding it keeps the frozen
+    # dataclass hashable (all other fields are). Equality still includes it.
+    metadata: dict[str, Any] = field(default_factory=dict, hash=False)
 
     def passed(self, threshold: float = 0.5) -> bool:
         """Return whether the score meets ``threshold`` (default 0.5)."""
@@ -72,7 +76,8 @@ class JudgeResult:
     # Ordering dunders so comparisons like ``result > 0.8`` work. Python's
     # rich-comparison operators dispatch to these and never fall back to
     # ``__float__``, so they must be defined explicitly. ``__eq__`` is left to
-    # the dataclass (value equality + frozen hashing) on purpose.
+    # the dataclass: it is value-equality between results (so ``result == 0.9``
+    # is False — a result never equals a bare float), not score-comparison.
     def __lt__(self, other: SupportsFloat) -> bool:
         return self.score < float(other)
 

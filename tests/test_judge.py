@@ -133,6 +133,26 @@ def test_string_score_rejected() -> None:
         judge.score("p", "r")
 
 
+@pytest.mark.parametrize(
+    "raw",
+    ['{"score": NaN}', '{"score": Infinity}', '{"score": -Infinity}'],
+)
+def test_non_finite_score_is_rejected(raw: str) -> None:
+    # json accepts NaN/Infinity; a non-finite "score" must NOT silently become
+    # a perfect 1.0 (or 0.0) and sail through a `> 0.8` gate.
+    judge = Judge(provider=MockProvider(text=raw), rubric="relevance")
+    with pytest.raises(ParseError, match="finite numeric"):
+        judge.score("p", "r")
+
+
+def test_non_finite_confidence_falls_back_to_default() -> None:
+    judge = Judge(
+        provider=MockProvider(text='{"score": 0.5, "confidence": NaN}'),
+        rubric="relevance",
+    )
+    assert judge.score("p", "r").confidence == 1.0
+
+
 def test_confidence_defaults_when_missing() -> None:
     judge = Judge(provider=MockProvider(text='{"score": 0.5}'), rubric="relevance")
     assert judge.score("p", "r").confidence == 1.0

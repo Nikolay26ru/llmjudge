@@ -18,8 +18,6 @@ from llmjudge.errors import ParseError
 
 # ```json ... ``` or plain ``` ... ``` fenced blocks.
 _FENCE_RE = re.compile(r"```(?:json|JSON)?\s*(.*?)```", re.DOTALL)
-# A trailing comma right before a closing brace/bracket (a common model slip).
-_TRAILING_COMMA_RE = re.compile(r",(\s*[}\]])")
 
 
 def extract_json(text: str) -> dict[str, Any]:
@@ -60,13 +58,46 @@ def _try_load(candidate: str) -> Any:
         return json.loads(candidate)
     except json.JSONDecodeError:
         pass
-    cleaned = _TRAILING_COMMA_RE.sub(r"\1", candidate)
+    cleaned = _strip_trailing_commas(candidate)
     if cleaned != candidate:
         try:
             return json.loads(cleaned)
         except json.JSONDecodeError:
             return None
     return None
+
+
+def _strip_trailing_commas(text: str) -> str:
+    """Remove commas that sit right before a ``}``/``]``, ignoring strings.
+
+    A naive regex would corrupt string *values* that contain ``,}`` or ``,]``;
+    this walks the text tracking JSON string state and only drops *structural*
+    trailing commas.
+    """
+    out: list[str] = []
+    in_string = False
+    escaped = False
+    length = len(text)
+    for i, char in enumerate(text):
+        if in_string:
+            out.append(char)
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == ",":
+            nxt = i + 1
+            while nxt < length and text[nxt] in " \t\r\n":
+                nxt += 1
+            if nxt < length and text[nxt] in "}]":
+                continue  # drop this structural trailing comma
+        out.append(char)
+    return "".join(out)
 
 
 def _brace_objects(text: str) -> Iterator[str]:

@@ -72,3 +72,15 @@ def test_provider_response_defaults() -> None:
     assert resp.model is None
     assert resp.input_tokens is None
     assert resp.metadata == {}
+
+
+def test_judge_result_is_hashable_despite_metadata() -> None:
+    result = JudgeResult(score=0.9, metadata={"k": "v"})
+    assert isinstance(hash(result), int)
+    # Equal results (incl. metadata) collapse in a set.
+    twin = JudgeResult(score=0.9, metadata={"k": "v"})
+    assert len({result, twin}) == 1
+
+
+def test_provider_response_is_hashable_despite_metadata() -> None:
+    assert isinstance(hash(ProviderResponse(text="x", metadata={"a": 1})), int)

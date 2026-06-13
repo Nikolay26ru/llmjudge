@@ -15,6 +15,7 @@ Swapping in a real backend is just a different spec, e.g.
 
 from __future__ import annotations
 
+import math
 from typing import Any
 
 from llmjudge.errors import ConfigurationError, ParseError
@@ -138,13 +139,13 @@ def _clamp_unit(value: float) -> float:
 
 
 def _coerce_score(value: Any) -> float:
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise ParseError(f"Judge output missing a numeric 'score' (got {value!r}).")
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        raise ParseError(f"Judge output needs a finite numeric 'score' (got {value!r}).")
     return _clamp_unit(float(value))
 
 
 def _coerce_unit(value: Any, *, default: float) -> float:
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
         return default
     return _clamp_unit(float(value))
 

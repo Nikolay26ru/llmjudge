@@ -24,3 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     commas, nested braces) with a clear `ParseError`.
   - Typed exception hierarchy (`LLMJudgeError` and subclasses).
   - Runnable examples and a README quickstart that executes offline.
+
+### Hardened (M1 adversarial review)
+- Trailing-comma JSON repair is now string-aware — it no longer corrupts string
+  values that contain `,}` or `,]`.
+- Non-finite scores/confidence (`NaN`, `Infinity`) are rejected/defaulted
+  instead of silently clamping to a perfect `1.0`.
+- `JudgeResult` and `ProviderResponse` are now genuinely hashable (the `dict`
+  `metadata` field is excluded from the hash).

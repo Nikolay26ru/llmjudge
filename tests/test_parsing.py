@@ -54,6 +54,16 @@ def test_trailing_comma_is_tolerated() -> None:
     }
 
 
+def test_trailing_comma_cleanup_preserves_string_values() -> None:
+    # The ",}" inside the string value must survive; only the structural
+    # trailing comma before the final "}" is removed.
+    assert extract_json('{"a": "x,}y", "b": 1,}') == {"a": "x,}y", "b": 1}
+
+
+def test_trailing_comma_before_bracket_inside_string_preserved() -> None:
+    assert extract_json('{"a": "y,] z", "b": [1,],}') == {"a": "y,] z", "b": [1]}
+
+
 def test_first_object_wins_when_multiple() -> None:
     text = '{"score": 0.1} and then {"score": 0.9}'
     assert extract_json(text) == {"score": 0.1}
