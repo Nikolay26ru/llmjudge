@@ -59,8 +59,8 @@ adopted core. Narrow and deep beats wide and shallow.
 ## Done / handoff
 - [x] wheel builds (`uv build`; verified importable + CLI works from a clean env)
 - [x] pushed to public GitHub repo, CI green on 3.11/3.12/3.13
-- [x] published to PyPI as `llm-judge-kit` (v0.1.0)
-- [ ] (human) submit to "Claude for Open Source"
+- [x] published to PyPI as `llm-judge-kit` (v0.1.0 → v0.1.1 → v0.1.2)
+- [x] (human) submitted to "Claude for Open Source"
 
 All milestones M0–M5 complete. Gate green (ruff + ruff-format + mypy strict +
 pytest, 99.9% coverage, 215 tests + 3 skipped live). New provider/judge/rubric
