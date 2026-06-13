@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import subprocess
+import sys
+
 import llmjudge
 
 
@@ -23,3 +26,19 @@ def test_headline_snippet_runs() -> None:
     result = judge.score("What is the capital of France?", "Paris.")
     assert result > 0.8
     assert result.passed()
+
+
+def test_importing_core_pulls_in_no_provider_sdks() -> None:
+    # The wedge promise: `import llmjudge` must not drag in any provider SDK.
+    # Checked in a fresh interpreter because other tests import them eagerly.
+    probe = (
+        "import sys; import llmjudge; "
+        "leaked = sorted(m for m in ('openai', 'anthropic', 'httpx') if m in sys.modules); "
+        "assert not leaked, leaked"
+    )
+    proc = subprocess.run(
+        [sys.executable, "-c", probe],
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0, f"core import leaked provider SDKs: {proc.stderr.strip()}"
