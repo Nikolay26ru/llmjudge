@@ -67,6 +67,42 @@ pytest, 99.9% coverage, 215 tests + 3 skipped live). New provider/judge/rubric
 adds with no core changes (registries + protocols). Architecture is modular:
 benchmark ⟂ provider ⟂ judge ⟂ reporting.
 
+## Phase 2 — Growth & ecosystem adoption
+
+Goal: take `llm-judge-kit` from "published" to "depended-on" — mature-OSS repo,
+frozen+documented API, and ready-to-send launch/outreach drafts. Regimen:
+test → implement → gate → subagent review per block; main always green; small
+commits; runtime core stays zero-deps. Guardrail: prepare-only — no social
+posts, no PRs to third-party repos, no new tags/releases/PyPI uploads without an
+explicit human command. New changes accumulate under CHANGELOG `[Unreleased]`.
+
+Brand decision: keep **"LLMJudge Kit"** (display) + `llm-judge-kit` (dist) +
+`llm_judge_kit` (import). The TZ's literal `# llm-judge-kit` heading is treated
+as stale (written against the old `# LLMJudge`); the live, deliberate choice
+stands. `LLMJudgeError` (published API) unchanged.
+
+### Block A — Repo & release polish
+- [ ] PyPI version + downloads badges in README
+- [ ] `docs/release-notes/v0.1.0.md` (committed; the release itself already exists)
+- [ ] `SECURITY.md`, `CODE_OF_CONDUCT.md` (Contributor Covenant)
+- [ ] `.github/ISSUE_TEMPLATE/` (bug + feature + config) and `PULL_REQUEST_TEMPLATE.md`
+- [ ] CLI `--version` flag (+ test)
+- [ ] verify `py.typed` ships in the wheel; clean-venv install + `llm-judge-kit --version`
+
+### Block B — Product depth & DX
+- [ ] Freeze + document the public API surface (`docs/api.md` + an `__all__` snapshot test)
+- [ ] Run every README/`examples/` snippet in a clean env; fix drift
+- [ ] New rubrics `coherence`, `completeness` (+ tests)
+- [ ] pytest-plugin DX: failure shows score/reason/violations (verify) + doc example
+- [ ] Benchmark demo: dataset + one command → HTML report (referenced from README)
+
+### Block C — Launch drafts (LOCAL/gitignored; human sends)
+- [ ] `docs/launch/{show-hn,reddit,x-thread,blog,comparison}.md` — facts web-verified, `[VERIFY:]` where not
+
+### Block D — Integrations & outreach
+- [ ] `examples/integrations/` runnable (offline/Mock, graceful skip) — LangChain, LlamaIndex, DSPy, raw
+- [ ] `docs/outreach/targets.md` (8–12 repos, web-verified) + ≥6 draft PR/issue docs (LOCAL/gitignored)
+
 ## Decisions log (ambiguity resolutions)
 - Repo root at `~/llmjudge` (durable) rather than the session outputs path.
 - Dev env pinned to CPython 3.12 (mypy/tooling stability); `requires-python>=3.11`.

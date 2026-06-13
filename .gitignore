@@ -32,3 +32,9 @@ coverage.xml
 CLAUDE.md
 PROMPT.md
 docs/strategy.md
+# Launch/outreach drafts are prepared for the maintainer to send by hand; they
+# are not committed to the public repo (a coordinated self-promotion folder
+# works against the project's credibility).
+docs/launch/
+docs/outreach/
+TZ_*.md
