@@ -9,3 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Project scaffold: `pyproject.toml`, tooling gate (ruff + mypy strict + pytest
   with ≥95% coverage), CI workflow, MIT license, contributor docs.
+- **Wedge core (M1):**
+  - `Judge` — pairs a provider with a rubric; `score()` returns a typed
+    `JudgeResult`; `__call__` alias and `passed()` convenience.
+  - `JudgeResult` / `ProviderResponse` — frozen, typed; `JudgeResult` casts
+    (`__float__`) and compares (`<`, `<=`, `>`, `>=`) like its score.
+  - `Provider` protocol + `BaseProvider`; deterministic offline `MockProvider`.
+  - Provider registry with `"scheme:model"` spec parsing (`register_provider`,
+    `make_provider`, `available_providers`).
+  - `Rubric` + registry and five built-ins: factuality, groundedness,
+    relevance, instruction_following, safety (`register_rubric`, `get_rubric`,
+    `available_rubrics`).
+  - Robust `extract_json` parser (markdown fences, surrounding prose, trailing
+    commas, nested braces) with a clear `ParseError`.
+  - Typed exception hierarchy (`LLMJudgeError` and subclasses).
+  - Runnable examples and a README quickstart that executes offline.

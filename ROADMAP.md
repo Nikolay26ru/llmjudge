@@ -17,16 +17,16 @@ adopted core. Narrow and deep beats wide and shallow.
 - [x] gate green locally
 
 ## M1 — Wedge core (TOP priority)
-- [ ] `types.py` — `JudgeResult`, `ProviderResponse` (frozen, `__float__`, `passed()`)
-- [ ] `providers/base.py` — `Provider` Protocol + `BaseProvider`
-- [ ] `providers/mock.py` — deterministic `MockProvider` (offline)
-- [ ] `parsing.py` — robust JSON extraction from model output
-- [ ] `rubrics/` — built-in rubrics (factuality, groundedness, relevance, instruction_following, safety)
-- [ ] `errors.py` — typed exception hierarchy
-- [ ] provider registry / `Judge(provider="mock:...")` string spec parsing
-- [ ] `judge.py` — `Judge` class + target public API
-- [ ] README with a working 10-line example above the fold
-- [ ] full coverage on mock; README example runs
+- [x] `types.py` — `JudgeResult`, `ProviderResponse` (frozen, `__float__`, ordering, `passed()`)
+- [x] `providers/base.py` — `Provider` Protocol + `BaseProvider`
+- [x] `providers/mock.py` — deterministic `MockProvider` (offline)
+- [x] `parsing.py` — robust JSON extraction from model output
+- [x] `rubrics/` — built-in rubrics (factuality, groundedness, relevance, instruction_following, safety)
+- [x] `errors.py` — typed exception hierarchy
+- [x] provider registry / `Judge(provider="mock:...")` string spec parsing
+- [x] `judge.py` — `Judge` class + target public API
+- [x] README with a working 10-line example above the fold
+- [x] full coverage on mock (100%); README example runs
 
 ## M2 — Real providers
 - [ ] openai-compatible provider (any OpenAI-compatible base_url)
