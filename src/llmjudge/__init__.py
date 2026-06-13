@@ -24,8 +24,11 @@ from llmjudge.errors import (
 from llmjudge.judge import Judge
 from llmjudge.parsing import extract_json
 from llmjudge.providers import (
+    AnthropicProvider,
     BaseProvider,
     MockProvider,
+    OllamaProvider,
+    OpenAIProvider,
     Provider,
     available_providers,
     make_provider,
@@ -42,12 +45,15 @@ from llmjudge.types import JudgeResult, ProviderResponse
 __version__ = "0.1.0"
 
 __all__ = [
+    "AnthropicProvider",
     "BaseProvider",
     "ConfigurationError",
     "Judge",
     "JudgeResult",
     "LLMJudgeError",
     "MockProvider",
+    "OllamaProvider",
+    "OpenAIProvider",
     "ParseError",
     "Provider",
     "ProviderError",

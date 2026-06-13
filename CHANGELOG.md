@@ -25,6 +25,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Typed exception hierarchy (`LLMJudgeError` and subclasses).
   - Runnable examples and a README quickstart that executes offline.
 
+- **Real providers (M2):**
+  - `OpenAIProvider` (Chat Completions; works with any OpenAI-compatible
+    `base_url`), `AnthropicProvider` (Messages API), `OllamaProvider` (local,
+    via httpx). Registered under the `openai:`/`anthropic:`/`ollama:` schemes.
+  - SDKs are imported lazily — the core stays dependency-free; the import only
+    happens when a real client is built, with a clear error pointing at the
+    extra to install.
+  - Offline unit tests drive every provider through injected fake clients;
+    live API tests are gated behind `LLMJUDGE_LIVE_TESTS=1` (skipped by default).
+
 ### Hardened (M1 adversarial review)
 - Trailing-comma JSON repair is now string-aware — it no longer corrupts string
   values that contain `,}` or `,]`.

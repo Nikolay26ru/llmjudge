@@ -29,10 +29,11 @@ adopted core. Narrow and deep beats wide and shallow.
 - [x] full coverage on mock (100%); README example runs
 
 ## M2 — Real providers
-- [ ] openai-compatible provider (any OpenAI-compatible base_url)
-- [ ] anthropic provider
-- [ ] ollama provider (httpx)
-- [ ] live tests gated behind `LLMJUDGE_LIVE_TESTS=1` (skip by default)
+- [x] openai-compatible provider (any OpenAI-compatible base_url)
+- [x] anthropic provider
+- [x] ollama provider (httpx)
+- [x] live tests gated behind `LLMJUDGE_LIVE_TESTS=1` (skip by default)
+- [x] offline tests via injected fake clients (no network); lazy SDK import
 
 ## M3 — Consensus + reliability
 - [ ] `ConsensusJudge` (voting across judge models, confidence from agreement)
