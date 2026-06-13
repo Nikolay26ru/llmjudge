@@ -9,7 +9,11 @@ from pathlib import Path
 import pytest
 
 _EXAMPLES_DIR = Path(__file__).resolve().parents[1] / "examples"
-_EXAMPLES = sorted(_EXAMPLES_DIR.glob("*.py"))
+# Top-level examples plus the integration examples (which degrade to an offline
+# stub when their framework isn't installed, so they still run with exit 0).
+_EXAMPLES = sorted(_EXAMPLES_DIR.glob("*.py")) + sorted(
+    (_EXAMPLES_DIR / "integrations").glob("*.py")
+)
 
 
 def test_examples_directory_is_not_empty() -> None:

@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/api.md` documenting the public API surface, which is now frozen by a
   snapshot test so it cannot drift without a deliberate change + changelog entry.
 - A reproducible, offline benchmark demo in the README.
+- `examples/integrations/` — runnable integration examples for LangChain,
+  LlamaIndex, DSPy, and a raw pipeline. Each runs offline (stub + `MockProvider`
+  when the framework/LLM is absent) and is exercised in CI.
 
 ## [0.1.1] - 2026-06-14
 
